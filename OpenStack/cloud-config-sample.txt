@@ -1,0 +1,16 @@
+version 1
+
+#cloud-config
+chpasswd:
+  list: |
+    user1:password1
+    user2:password2
+    user3:password3
+  expire: False
+
+version2
+
+#cloud-config
+password: root
+chpasswd: { expire: False }
+ssh_pwauth: True;
