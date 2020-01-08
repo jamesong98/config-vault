@@ -1,0 +1,75 @@
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+source /etc/network/interfaces.d/*
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+auto eno1
+iface eno1 inet manual
+
+auto br0
+iface br0 inet static
+   bridge_ports eno1
+   bridge_fd 0
+   address 192.168.1.90/24
+   gateway 192.168.1.254
+   dns-nameservers 192.168.1.15
+
+#auto eno2
+#iface eno2 inet manual
+#  bond-master bond3
+
+#auto eno3
+#iface eno3 inet manual
+#  bond-master bond3
+
+#auto eno4
+#iface eno4 inet manual
+#  bond-master bond3
+
+auto ens2f0
+iface ens2f0 inet manual
+  bond-master bond3
+
+auto ens2f1
+iface ens2f1 inet manual
+  bond-master bond3
+
+#auto ens2f2
+#iface ens2f2 inet manual
+#  bond-master bond3
+
+#auto ens2f3
+#iface ens2f3 inet manual
+#  bond-master bond3
+
+auto bond3
+iface bond3 inet manual
+#  bond-mode 6
+#  bond-slaves ens2f0 ens2f1 ens2f2
+#  bond-lacp-rate 1
+#  bond-mode 5
+#  bond-mode active-backup
+#  bond-arp-ip-target 10.0.3.90
+#  bond-arp-interval 500
+
+  bond-mode 0
+  bond-slaves none
+
+#  bond-mode 5
+#  bond-lacp-rate 1
+#  bond-slaves ens2f0 ens2f1 ens2f2 ens2f3 eno2 eno3
+
+  bond-miimon 100
+  bond-xmit_hash_policy encap3+4
+
+auto br3
+iface br3 inet static
+   bridge_ports bond3
+   bridge_fd 0
+   address 10.0.3.90/24
+
+
