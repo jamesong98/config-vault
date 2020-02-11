@@ -1,0 +1,7 @@
+#openstack API command
+for port in `neutron port-list | awk '{print $2}' | grep -v id`; do echo PortID $port; neutron port-show $port | grep -e "allowed_address_pairs" -e "tenant_id";done > portwithaap.txt
+
+#mysql
+use neutron
+select * from allowedaddresspairs;
+select COUNT(*) from allowedaddresspairs;
