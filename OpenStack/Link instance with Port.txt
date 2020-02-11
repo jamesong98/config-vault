@@ -1,1 +1,1 @@
-for ins in `nova list --all-tenants | grep -v ID | awk '{print $2}'`; do echo InstanceID $ins ; nova interface-list $ins ; done
+for ins in `nova list --all-tenants | grep -v ID | awk '{print $2}'`; do echo InstanceID $ins ; nova interface-list $ins | grep -v Port\ID | awk '{print $4}'; done
