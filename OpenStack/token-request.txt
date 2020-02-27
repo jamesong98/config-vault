@@ -1,0 +1,38 @@
+#escape any symbol if require by adding "\", reference https://adam.younglogic.com/2013/09/keystone-v3-api-examples/
+export OS_TENANT_NAME=
+export OS_USERNAME=
+export OS_PASSWORD=
+export OS_AUTH_URL=http://:5000
+#
+#get token
+#curl -s -v -X POST $OS_AUTH_URL/v2.0/tokens -H "Content-Type: application/json" -d '{"auth": {"tenantName": "'"$OS_TENANT_NAME"'", "passwordCredentials": {"username": "'"$OS_USERNAME"'", "password": "'"$OS_PASSWORD"'"}}}'
+
+
+
+
+export USERNAME=
+export PASSWORD=
+export URL=http://:5000
+curl -i \
+  -H "Content-Type: application/json" \
+  -d '
+{
+    "auth": {
+        "identity": {
+            "methods": [
+                "password"
+            ],
+            "password": {
+                "user": {
+                    "domain": {
+                        "name": "Default"
+                    },
+                    "name": "'"$USERNAME"'",
+                    "password": "'"$PASSWORD"'"
+                }
+            }
+        }
+     }
+}
+' \
+  $URL/v3/auth/tokens ; echo
