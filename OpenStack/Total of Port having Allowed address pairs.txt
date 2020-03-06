@@ -1,6 +1,11 @@
 #openstack API command
 for port in `neutron port-list | awk '{print $2}' | grep -v id`; do echo PortID $port; neutron port-show $port | grep -e "allowed_address_pairs" -e "tenant_id";done > portwithaap.txt
 
+###Step 1
+ for port in `neutron port-list | awk '{print $2}' | grep -v id`; do RES=$(neutron port-show $port); ADDRPAIR=$(echo "${RES}" | grep -e "allowed_address_pairs"); TID=$(echo "${RES}" | grep -e "tenant_id"); echo "${port} | ${ADDRPAIR} | ${TID}"; done > portwithaap.txt
+###Step 2
+less portwithaap.txt | awk -F"|" '{ if( $4 ~ /address/ ) print $1","$4","$8 }' | sed "s/ //g" | more
+
 #mysql
 use neutron
 select * from allowedaddresspairs;
