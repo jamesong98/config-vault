@@ -1,1 +1,6 @@
-for ins in `nova list --all-tenants | grep -v ID | awk '{print $2}'`; do echo InstanceID $ins ; nova interface-list $ins | grep -v Port\ID | awk '{print $4}'; done
+#openstack API
+for ins in `nova list --all-tenants | grep -v ID | awk '{print $2}'`; do port=$(nova interface-list $ins | grep -v "Port ID" | awk '{print $4}');echo $ins ""|" $port; done
+
+#MySQL
+use neutron
+select id,device_id from ports where id and device_id is not null
