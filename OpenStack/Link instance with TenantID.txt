@@ -1,0 +1,2 @@
+#openstack API
+for ins in `nova list --all-tenants | grep -v ID | awk '{print $2}'`;  do tenantmac=$(nova show $ins | grep tenant_id | awk '{print $4}') ; echo $ins "|" $tenantmac ;done
