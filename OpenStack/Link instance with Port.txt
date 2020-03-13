@@ -1,5 +1,5 @@
 #openstack API
-for ins in `nova list --all-tenants | grep -v ID | awk '{print $2}'`; do port=$(nova interface-list $ins | grep -v "Port ID" | awk '{print $4}');echo $ins ""|" $port; done
+for ins in `nova list --all-tenants | grep -v ID | awk '{print $2}'`; do port=$(nova interface-list $ins | grep -v "Port ID" | awk '{print $4}');echo $ins "|" $port; done
 
 #MySQL
 use neutron
