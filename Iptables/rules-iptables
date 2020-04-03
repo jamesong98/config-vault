@@ -9,7 +9,7 @@ FW1
 -A INPUT -j LOG --log-prefix "INPUT-- "
 -A OUTPUT -j LOG --log-prefix "OUTPUT-- "
 -A POSTROUTING -j LOG --log-prefix "POST-- "
--A POSTROUTING -o ens6 -j MASQUERADE
+-A POSTROUTING -o ens3 -j MASQUERADE
 
 COMMIT
 # Completed on Tue Feb 11 03:44:22 2020
