@@ -1,0 +1,1 @@
+Get-IscsiTarget | select NodeAddress | findstr "<volume id>"
