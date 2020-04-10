@@ -1,0 +1,19 @@
+#!/bin/bash
+echo 'wincompute3'
+ping 10.4 -c 2
+echo 'wincompute5'
+ping 10.6 -c 2
+echo 'wincompute6'
+ping 10.6 -c 2
+echo 'kvmcompute1'
+ping 10.7 -c 2
+echo 'kvmcompute2'
+ping 10.8 -c 2
+echo 'kvmcompute3'
+ping 10.9 -c 2
+echo 'sp1'
+ping 10.10 -c 2
+echo 'sp2'
+ping 10.11 -c 2
+echo 'sp3'
+ping 10.12 -c 2
