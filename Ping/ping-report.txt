@@ -1,0 +1,13 @@
+#!/bin/bash
+file="/home/ubuntu/Downloads/host"
+host=$(less $file | awk -F "|" '{print $1}')
+NOW=$(date +"%y%m%d-%H:%M")
+COUNT=2
+for vm in $host
+do
+        count=$(ping $vm -c $COUNT | grep 'received' | awk -F',' '{print $2 }' | awk '{ print $1 }')
+        if [ $count -eq 0 ]; then
+                hostname=$(less $file | grep $vm | sed "s/|//g" )
+                echo "$hostname is unreachable from `hostname`,`hostname -I` !!"
+        fi
+done >`hostname`-$NOW.log
