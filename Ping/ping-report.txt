@@ -1,5 +1,5 @@
 #!/bin/bash
-file="/home/ubuntu/Downloads/host"
+file="<host file here>"
 host=$(less $file | awk -F "|" '{print $1}')
 NOW=$(date +"%y%m%d-%H:%M")
 COUNT=2
