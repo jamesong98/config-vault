@@ -1,0 +1,9 @@
+#Server side
+<path>         <client ip or subnet>(rw,sync,no_subtree_check)
+
+
+#Client side 
+#mount
+sudo mount <server ip>:/<share dir> <local dir >
+#fstab adjustment (mount on boot) 
+<server ip>:<share dir>   <local dir> nfs auto,nofail,noatime,noclock,intr,tcp,actimeo=1800 0 0
