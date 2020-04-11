@@ -1,0 +1,3 @@
+#!/bin/bash
+#* 0 * * * <script path> > /dev/null 2><std error log path>
+mkdir -p <path>/$(date +"%y%m%d")/{<subfolder>}
