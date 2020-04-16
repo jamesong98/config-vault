@@ -3,6 +3,10 @@ file="<host file here>"
 host=$(less $file | awk -F "|" '{print $1}')
 NOW=$(date +"%y%m%d-%H:%M")
 COUNT=2
+FILE=`hostname`-$NOW.log
+echo -e "`hostname`" > $FILE
+echo -e "Failure-on-$NOW" >> $FILE
+echo -e "SRC\tSRCName\tDEST\tDESTName">> $FILE
 for vm in $host
 do
         count=$(ping $vm -c $COUNT | grep 'received' | awk -F',' '{print $2 }' | awk '{ print $1 }')
@@ -10,4 +14,4 @@ do
                 hostname=$(less $file | grep $vm | sed "s/|//g" )
                 echo "$hostname is unreachable from `hostname`,`hostname -I` !!"
         fi
-done >`hostname`-$NOW.log
+done >> $FILE
