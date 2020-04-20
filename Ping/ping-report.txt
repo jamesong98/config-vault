@@ -18,19 +18,19 @@ do
                 hostname=$(less $file | grep $vm | sed "s/|//g" )
 				hostname2=$(less $file | grep $vm | awk '{print3}')
 				FAIL=`echo "$FAIL+0.1" | bc`
-                echo -e "$NOW\t`hostname -I`\t$orsource\t$hostname\t$orsource-$hostname2\tFail"
+                echo -e "$NOW\t`hostname -I`\t$orsource\t$hostname\t$orsource-$hostname2\t$FAIL"
         fi
 		
 		if [[ $count -ne $COUNT && $count -ne 0 ]]; then
                 hostname=$(less $file | grep $vm | sed "s/|//g" )
                 hostname2=$(less $file | grep $vm | awk '{print $3}' )
 				PFAIL=`echo "$PFAIL+0.1" | bc`
-                echo -e "$NOW\t`hostname -I`\t$orsource\t$hostname\t$orsource-$hostname2\tFail-partial"
+                echo -e "$NOW\t`hostname -I`\t$orsource\t$hostname\t$orsource-$hostname2\t$PFAIL"
         fi
 		
         if [ $count -eq $COUNT ]; then
                 hostname=$(less $file | grep $vm | sed "s/|//g" )
                 hostname2=$(less $file | grep $vm | awk '{print $3}' )
-                echo -e "$NOW\t`hostname -I`\t$orsource\t$hostname\t$orsource-$hostname2\tPass"
+                echo -e "$NOW\t`hostname -I`\t$orsource\t$hostname\t$orsource-$hostname2\t$PASS"
         fi
 done >> $FILE
