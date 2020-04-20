@@ -4,6 +4,9 @@ host=$(less $file | awk -F "|" '{print $1}')
 orsource=$(hostname | sed "s/ping-//g")
 NOW=$(date +"%y%m%d-%H:%M")
 COUNT=2
+FAIL=2
+PFAIL=1
+PASS=0
 FILE=`hostname`-$NOW.log
 echo -e "`hostname`" > $FILE
 echo -e "Failure-on-$NOW" >> $FILE
@@ -14,12 +17,14 @@ do
         if [ $count -eq 0 ]; then
                 hostname=$(less $file | grep $vm | sed "s/|//g" )
 				hostname2=$(less $file | grep $vm | awk '{print3}')
+				FAIL=`echo "$FAIL+0.1" | bc`
                 echo -e "$NOW\t`hostname -I`\t$orsource\t$hostname\t$orsource-$hostname2\tFail"
         fi
 		
 		if [[ $count -ne $COUNT && $count -ne 0 ]]; then
                 hostname=$(less $file | grep $vm | sed "s/|//g" )
                 hostname2=$(less $file | grep $vm | awk '{print $3}' )
+				PFAIL=`echo "$PFAIL+0.1" | bc`
                 echo -e "$NOW\t`hostname -I`\t$orsource\t$hostname\t$orsource-$hostname2\tFail-partial"
         fi
 		
