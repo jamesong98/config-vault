@@ -1,0 +1,2 @@
+#!/bin/bash
+echo "<Body>" | mutt -s "<Subject>" <Recepient> -a <attachment>
