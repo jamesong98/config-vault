@@ -6,4 +6,4 @@
 #mount
 sudo mount <server ip>:/<share dir> <local dir >
 #fstab adjustment (mount on boot) 
-<server ip>:<share dir>   <local dir> nfs auto,nofail,noatime,noclock,intr,tcp,actimeo=1800 0 0
+<server ip>:<share dir>   <local dir> nfs rw,bg,hard,_netdev 0 0
