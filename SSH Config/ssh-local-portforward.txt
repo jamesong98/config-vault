@@ -1,0 +1,1 @@
+ssh -L <localport>:localhost:<remote machine service port> -L <localport>:localhost:<remote machine service port>  <username>@<remote machine> -i <private key path>
