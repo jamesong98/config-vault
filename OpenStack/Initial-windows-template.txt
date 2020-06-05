@@ -1,3 +1,5 @@
+https://tinyurl.com/y9qz67ka
+
 Set-ExecutionPolicy Unrestricted
 Invoke-WebRequest -UseBasicParsing https://cloudbase.it/downloads/CloudbaseInitSetup_Stable_x64.msi -OutFile cloudbaseinit.msi
 
