@@ -10,6 +10,6 @@ Enable-NetFirewallRule -Name RemoteDesktop-UserMode-In-TCP
 
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 
-OOBE Script
+OOBE Script (2016)
 %WINDIR%\system32\sysprep\sysprep.exe /generalize /shutdown /oobe
 
