@@ -1,0 +1,15 @@
+[Unit]
+Description=<Name of the servuce> 
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=<user>
+Group=<group>
+ExecStart=<command to start the serivce>
+
+SyslogIdentifier=<name of the application, use to search in syslog in future>
+
+[Install]
+WantedBy=multi-user.target
