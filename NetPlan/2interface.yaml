@@ -1,0 +1,24 @@
+network:
+    ethernets:
+        ens3:
+            addresses:
+              - <CIDR>
+            dhcp4: no
+            gateway4: <Gateway IP>
+            nameservers:
+                addresses: [DNS Server1, DNS Server2]
+            match:
+                macaddress: <MAC Address>
+            set-name: <Interface Name>
+        ens4:
+             addresses:
+               - <CIDR>
+             dhcp4: no
+             routes:
+               - to: <CIDR>
+                 via: <Interface IP>
+             match:
+                 macaddress: <MAC Address>
+             set-name: <Interface Name>
+
+    version: 2
