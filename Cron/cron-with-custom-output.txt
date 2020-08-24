@@ -1,0 +1,2 @@
+#Everyday
+0 0 * * * <path to scrip> > /dev/null 2><path to output error>
