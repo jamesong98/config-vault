@@ -1,13 +1,17 @@
 https://tinyurl.com/y9qz67ka
 
+#Download Cloud Init
 Set-ExecutionPolicy Unrestricted
 Invoke-WebRequest -UseBasicParsing https://cloudbase.it/downloads/CloudbaseInitSetup_Stable_x64.msi -OutFile cloudbaseinit.msi
-
+#Run Cloud Init Installer
 ./cloudbaseinit.msi
 
 Enable-NetFirewallRule -Name RemoteDesktop-UserMode-In-TCP
-
-
+#Enable Remote Desktop
+Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server'-name "fDenyTSConnections" -Value 0
+#Enable NLA
+Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
+#Download and Install Chocolatey
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 
 OOBE Script (2016)
