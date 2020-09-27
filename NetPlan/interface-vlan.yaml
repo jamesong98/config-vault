@@ -1,0 +1,24 @@
+network:
+  ethernets:
+    <NIC name>:
+      dhcp4: no
+      dhcp6: no
+  bridges:
+     br1:
+       dhcp4: no
+       dhcp6: no
+       interfaces: [ <vlan name> ]
+       addresses:
+       - <C.I.D.R>
+       gateway4: <Gateway IP>
+       nameservers:
+         addresses:
+           - <nameserver IP1>
+           - <nameserver IP2>
+  vlans:
+    <vlan name>:
+       id: <vlan id>
+       link: <NIC name>
+       dhcp4: no
+       dhcp6: no
+  version: 2
