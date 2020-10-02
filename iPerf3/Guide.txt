@@ -1,0 +1,9 @@
+iperf or iperf3
+Install iperf client
+Option 1
+iperf -c <iperf server ip>
+Option 2
+iperf -P 6 -c <iperf server ip> -J
+-P Number of Parallel Connection
+-c Run in client mode and put iperf server as argument
+-J Output result as json format
