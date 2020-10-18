@@ -1,3 +1,4 @@
+<#
 https://tinyurl.com/y9qz67ka
 
 #Download Cloud Init
@@ -16,4 +17,43 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 
 OOBE Script (2016)
 %WINDIR%\system32\sysprep\sysprep.exe /generalize /shutdown /oobe /mode:vm
+#>
+
+<#This script is build for setup Windows Image for OpenStack
+Date : 2020 Oct
+Prerequiste: Running vm with virtio installed.
+https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/stable-virtio/virtio-win.iso
+#>
+If (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")){   
+    $arguments = "-ExecutionPolicy Bypass & '" + $myinvocation.mycommand.definition + "'"
+    Start-Process "$psHome\powershell.exe" -Verb runAs -ArgumentList $arguments
+    break
+    }
+
+Write-Host "Proceed to User Desktop ..."
+cd "$env:USERPROFILE\Desktop"
+#Download Cloud Init
+Write-Host "Download Cloud-Init Package ..."
+Invoke-WebRequest -UseBasicParsing https://cloudbase.it/downloads/CloudbaseInitSetup_Stable_x64.msi -OutFile cloudbaseinit.msi
+Write-Host "Configure Cloud Init (Username, COMPort, Run as Local System User, NO Sysprep and Generalize since we do manuall at final stage)"
+./cloudbaseinit.msi
+#Continue to Next Stage
+Read-Host "Press Enter key to continue ..."
+#Enable Firewall for RDP connection
+Write-Host "Enable Firewall Rule for RDP"
+Enable-NetFirewallRule -Name RemoteDesktop-UserMode-In-TCP
+#Enable RDP
+Write-Host "Enable RDP"
+Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server'-name "fDenyTSConnections" -Value 0
+#Enable NLA for RDP
+Write-Host "Enable NLA for RDP"
+Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
+#Chocolatey Stage
+Write-Host "Install Chocolatey"
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+#Sysprep Stage
+Read-Host "Please confirm you are done will all config before proceed. Ctrl + C to cancel or Press Enter key to continue ..."
+Write-Host "Sysprep ... Will do Shutdown afterwards"
+cd "$env:windir"
+.\System32\Sysprep\sysprep.exe /generalize /shutdown /oobe
 
