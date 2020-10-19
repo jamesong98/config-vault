@@ -35,8 +35,13 @@ cd "$env:USERPROFILE\Desktop"
 #Download Cloud Init
 Write-Host "Download Cloud-Init Package ..."
 Invoke-WebRequest -UseBasicParsing https://cloudbase.it/downloads/CloudbaseInitSetup_Stable_x64.msi -OutFile cloudbaseinit.msi
+Clear-Host
 Write-Host "Configure Cloud Init (Username, COMPort, Run as Local System User, NO Sysprep and Generalize since we do manuall at final stage)"
-./cloudbaseinit.msi
+Write-Host "================================================================================================================================="
+Write-Host "Please do not touch anything while the automation running, if not please continue yourself! Downloading Script..."
+Write-Host "================================================================================================================================="
+Invoke-WebRequest -UseBasicParsing https://github.com/james-1912/config-vault/blob/master/OpenStack/CloudInit-zeus.exe?raw=true -OutFile Cloudbase-Init.exe
+./Cloudbase-Init.exe
 #Continue to Next Stage
 Read-Host "Press Enter key to continue ..."
 #Enable Firewall for RDP connection
