@@ -42,6 +42,8 @@ Write-Host "Please do not touch anything while the automation running, if not pl
 Write-Host "================================================================================================================================="
 Invoke-WebRequest -UseBasicParsing https://github.com/james-1912/config-vault/blob/master/OpenStack/CloudInit-zeus.exe?raw=true -OutFile Cloudbase-Init.exe
 ./Cloudbase-Init.exe
+Write-Host "Downloading Unattended XML file"
+Invoke-WebRequest -UseBasicParsing https://raw.githubusercontent.com/james-1912/config-vault/master/Windows%20Answer%20File/Win10-Ent_2004_Unattend.xml-OutFile Unattended.xml
 #Continue to Next Stage
 Read-Host "Press Enter key to continue ..."
 #Enable Firewall for RDP connection
