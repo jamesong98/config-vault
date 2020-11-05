@@ -42,8 +42,6 @@ Write-Host "Please do not touch anything while the automation running, if not pl
 Write-Host "================================================================================================================================="
 Invoke-WebRequest -UseBasicParsing https://github.com/james-1912/config-vault/blob/master/OpenStack/CloudInit-zeus.exe?raw=true -OutFile Cloudbase-Init.exe
 ./Cloudbase-Init.exe
-Write-Host "Downloading Unattended XML file"
-Invoke-WebRequest -UseBasicParsing https://raw.githubusercontent.com/james-1912/config-vault/master/Windows%20Answer%20File/Win10-Ent_2004_Unattend.xml -OutFile Unattended.xml
 #Continue to Next Stage
 Read-Host "Press Enter key to continue ..."
 #Enable Firewall for RDP connection
@@ -58,6 +56,13 @@ Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\W
 #Chocolatey Stage
 Write-Host "Install Chocolatey"
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+#Download Unattended File
+Write-Host "Downloading Unattended XML archive"
+Invoke-WebRequest -UseBasicParsing https://github.com/james-1912/config-vault/raw/master/Windows%20Answer%20File/WinSer2019-1909-Activation.zip -OutFile WinSer2019-1909-Activation.zip
+#Unzip to Desktop
+."C:\Program Files\7-zip\7z.exe" x "$env:USERPROFILE\Desktop\WinSer2019-1909-Activation.zip" -o"$env:USERPROFILE\Desktop"
+#Renaming
+Rename-Item -Path ".\WinSer2019-1909-Activation.xml" -NewName Unattended.xml
 #Sysprep Stage
 Read-Host "Please confirm you are done will all config before proceed. Ctrl + C to cancel or Press Enter key to continue ..."
 Write-Host "Sysprep ... Will do Shutdown afterwards"
