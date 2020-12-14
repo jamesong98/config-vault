@@ -56,6 +56,8 @@ Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\W
 #Chocolatey Stage
 Write-Host "Install Chocolatey"
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+#Install 7-zip
+choco install 7zip -y
 #Download Unattended File
 Write-Host "Downloading Unattended XML archive"
 Invoke-WebRequest -UseBasicParsing https://github.com/james-1912/config-vault/raw/master/Windows%20Answer%20File/WinSer2019-1909-Activation.zip -OutFile WinSer2019-1909-Activation.zip
