@@ -1,0 +1,3 @@
+#!/bin/bash
+curl -kH "X-Auth-Token:<admin_token in keystone.conf>" -H "X-Subject-Token:<token to be validate>" \
+           "https://<keystone ip and port>/v3/auth/tokens"
