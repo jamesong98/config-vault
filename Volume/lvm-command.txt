@@ -1,0 +1,13 @@
+remove a physical volume from volume group
+vgreduce <volume group name> <physical device>
+
+active a volume group
+vgchange -an <volume group name>
+remove volume group
+vgremove <volume group name>
+
+create a lvm thin volume group
+vgcreate <volume group name> <physical device>
+
+create a thinpool
+lvcreate -L 500M --thinpool tp_pool vg_thin

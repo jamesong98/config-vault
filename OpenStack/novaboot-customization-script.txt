@@ -1,0 +1,1 @@
+nova --debug boot --flavor <flavor id> --boot-volume <root volume id> --user-data <path to script bash/sh/YAML> --availability-zone <avaliability zone name> --security-groups <security group names> --nic port-id=<port to attach> <VM Name>
