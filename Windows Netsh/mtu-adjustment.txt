@@ -1,0 +1,3 @@
+netsh interface ipv4 show subinterface
+netsh interface ipv4 set subinterface “<Name of the interface>” mtu=<mtu value> store=persistent
+#might need to check on the network adapter in control panel -> advance tab
