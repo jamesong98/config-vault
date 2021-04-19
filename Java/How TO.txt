@@ -1,0 +1,7 @@
+java 8 need to do 
+javac <InstallCert.java>
+
+java 11 direct 
+java <InstallCert.java>
+https://mkyong.com/webservices/jax-ws/suncertpathbuilderexception-unable-to-find-valid-certification-path-to-requested-target/
+https://github.com/escline/InstallCert
