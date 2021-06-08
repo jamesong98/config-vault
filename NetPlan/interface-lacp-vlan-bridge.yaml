@@ -1,0 +1,172 @@
+# This is the network config written by 'subiquity'
+network:
+  ethernets:
+    enp4s0f0:
+      dhcp4: no
+      dhcp6: no
+    enp4s0f1:
+      dhcp4: no
+      dhcp6: no
+    enp4s0f2:
+      dhcp4: no
+      dhcp6: no
+    enp4s0f3:
+      dhcp4: no
+      dhcp6: no
+    enp133s0f0:
+      dhcp4: no
+      dhcp6: no
+      mtu: 9000
+    enp133s0f1:
+      dhcp4: no
+      dhcp6: no
+      mtu: 9000
+    enp130s0f0:
+      dhcp4: no
+      dhcp6: no
+      mtu: 9000
+    enp130s0f1:
+      dhcp4: no
+      dhcp6: no
+      mtu: 9000
+    enp130s0f2:
+      dhcp4: no
+      dhcp6: no
+      mtu: 9000
+    enp130s0f3:
+      dhcp4: no
+      dhcp6: no
+      mtu: 9000
+    eno1:
+      dhcp4: no
+      dhcp6: no
+      mtu: 9000
+    eno2:
+      dhcp4: no
+      dhcp6: no
+      mtu: 9000
+    eno3: 
+      dhcp4: no
+      dhcp6: no
+      mtu: 9000
+    eno4: 
+      dhcp4: no
+      dhcp6: no
+      mtu: 9000
+  bridges:
+    pr0:
+      addresses: [ <IP>/24 ]
+      interfaces: [ enp4s0f0 ]
+    br1:
+      dhcp4: no
+      dhcp6: no
+      addresses: [ <IP>/24 ]
+      interfaces: [ bond1.101 ]
+      mtu: 9000
+      gateway4: <IP>
+      nameservers:
+        addresses: [ <IP 1>, <IP 2>, <IP 3> ]
+        search: [ <localDNS>.local ]
+    br2:
+      dhcp4: no
+      dhcp6: no
+      addresses: [ <IP>/24 ]
+      interfaces: [ bond2.102 ]
+    br3:
+      dhcp4: no
+      dhcp6: no
+      addresses: [ <IP>/24 ]
+      interfaces: [ bond3.103 ]
+    br5:
+      dhcp4: no
+      dhcp6: no
+      addresses: [ <IP>/24 ]
+      interfaces: [ bond6.105 ]
+    br6:
+      dhcp4: no
+      dhcp6: no
+      addresses: [ <IP>/24 ]
+      interfaces: [ bond5.105 ]
+  bonds:
+    bond1:
+      dhcp4: no
+      dhcp6: no
+      interfaces: [ eno2, enp130s0f2 ]
+      mtu: 9000
+      parameters:
+        mode: 802.3ad
+        lacp-rate: fast
+        mii-monitor-interval: 100
+        transmit-hash-policy: encap3+4
+    bond2:
+      dhcp4: no
+      dhcp6: no
+      interfaces: [ eno3, enp130s0f1 ]
+      mtu: 9000
+      parameters:
+        mode: 802.3ad
+        lacp-rate: fast
+        mii-monitor-interval: 100
+        transmit-hash-policy: encap3+4
+    bond3:
+      dhcp4: no
+      dhcp6: no
+      interfaces: [ eno1, enp130s0f3 ]
+      mtu: 9000
+      parameters:
+        mode: 802.3ad
+        lacp-rate: fast
+        mii-monitor-interval: 100
+        transmit-hash-policy: encap3+4        
+    bond5:
+      dhcp4: no
+      dhcp6: no
+      interfaces: [ eno4, enp133s0f0 ]
+      mtu: 9000
+      parameters:
+        mode: 802.3ad
+        lacp-rate: fast
+        mii-monitor-interval: 100
+        transmit-hash-policy: encap3+4
+    bond6:
+      dhcp4: no
+      dhcp6: no
+      interfaces: [ enp130s0f0, enp133s0f1 ]
+      mtu: 9000
+      parameters:
+        mode: 802.3ad
+        lacp-rate: fast
+        mii-monitor-interval: 100
+        transmit-hash-policy: encap3+4
+  vlans:
+    bond1.101:
+      dhcp4: no
+      dhcp6: no
+      id: 101
+      link: bond1
+      mtu: 9000
+    bond2.102:
+      dhcp4: no   
+      dhcp6: no
+      id: 102
+      link: bond2
+      mtu: 9000
+    bond3.103:
+      dhcp4: no   
+      dhcp6: no
+      id: 103
+      link: bond3
+      mtu: 9000
+    bond5.105:
+      dhcp4: no   
+      dhcp6: no
+      id: 105
+      link: bond5
+      mtu: 9000
+    bond6.105:
+      dhcp4: no   
+      dhcp6: no
+      id: 105
+      link: bond6
+      mtu: 9000
+  version: 2
