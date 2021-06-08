@@ -1,0 +1,1 @@
+#!/bin/sh echo echo '-----AUTHOR: https://dannyda.com-----' echo echo '---Existing locks---' ls -l /run/lock/qemu-server rm -f /run/lock/qemu-server/lock-$1.conf echo echo '---Remaining locks---' ls -l /run/lock/qemu-server echo qm stop $1 && qm status $1

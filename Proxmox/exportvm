@@ -1,0 +1,4 @@
+qm config <VM ID>
+Copy disk path --> LVMxxx
+pvesm path <disk path from previous command>
+qemu-img convert -O qcow2 -f raw <Input> <Output>.qcow2 -p
