@@ -1,0 +1,81 @@
+---
+- name: for all host
+  hosts: all
+  vars_files: ../secrets/sensitive-data.yml
+  become: yes
+  tasks:
+  - name: create ansibleadmin user
+    ansible.builtin.user:
+      name: ansibleadmin
+      password: "{{ ansibleadminpass }}"
+      shell: /bin/bash
+      groups: sudo
+      append: yes
+  - name: send keyover authorized_keys
+    authorized_key:
+      user: ansibleadmin
+      state: present
+      key: "{{ lookup('file', '/root/ansible/secrets/id_ed25519.pub') }}"
+  - name: remove password authentication and permit root login
+    lineinfile:
+      path: /etc/ssh/sshd_config
+      regexp: '{{item.From}}' 
+      line:  '{{item.To}}'
+      state: present
+    loop: 
+      - { From: '^PasswordAuthentication', To: 'PasswordAuthentication no'}
+      - { From: '^PermitRootLogin', To: 'PermitRootLogin no'}
+  - name: restart sshd process
+    systemd:
+      name: sshd.service
+      state: restarted
+  - name: check sshd service
+    systemd:
+      name: sshd
+  - name: install common software
+    apt:
+      name: "{{item}}"
+      state: present
+      update_cache: yes
+    loop:
+      - jq
+      - byobu
+      - iftop
+      - net-tools
+      - software-properties-common
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg-agent
+   
+- name: for compute only
+  hosts: compute
+  become: yes
+  tasks:
+  - name: change hostname according to hosts file definition
+    ansible.builtin.hostname:
+      name: "{{ inventory_hostname }}"
+  - name: adjust kernel parameters  
+    sysctl:
+      name: "{{ item.name }}"
+      value: "{{ item.value }}"
+      sysctl_file: /etc/sysctl.conf
+      state: present
+      reload: yes
+    loop:
+      - { name: 'net.ipv6.conf.default.autoconf', value: '0'}
+      - { name: 'net.ipv4.ip_forward', value: '0'}
+  - name: Only Localhost can do Password authentication
+    blockinfile:
+      path: /etc/ssh/sshd_config
+      block: |
+        Match Address 127.0.0.1,::1 #Console LocalHost
+        PasswordAuthentication yes
+  - name: Logged sudo command
+    blockinfile:
+      path: /etc/sudoers
+      block: |
+        Defaults logfile=/var/log/sudo
+    
+
+    

@@ -1,0 +1,4 @@
+ansible-galaxy collection install ansible.posix
+apt-get install ansible sshpass -y
+chmod 400 /root/ansible/secrets/id_ed25519
+export ANSIBLE_HOST_KEY_CHECKING=False

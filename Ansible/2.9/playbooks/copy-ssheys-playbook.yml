@@ -1,0 +1,16 @@
+- hosts: all
+  vars_files: ../secrets/sensitive-data.yml
+  tasks:
+  - name: create ansibleadmin user
+    ansible.builtin.user:
+      name: ansibleadmin
+      password: "{{ ansibleadminpass }}"
+      shell: /bin/bash
+      groups: sudo
+      append: yes
+  - name: send keyover
+    ansible.posix.authorized_key:
+      user: ansibleadmin
+      state: present
+      key: "{{ lookup('file', '/root/.ssh/id_ed25519.pub') }}"
+  
