@@ -1,1 +1,1 @@
-robocopy \\source dir destination /E /R:5 /W:5 /TBD /V /MT:64
+robocopy \\source dir destination /E /R:5 /W:5 /TBD /V /MT:64 /MT:16 /B
