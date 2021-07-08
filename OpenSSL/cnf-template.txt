@@ -1,0 +1,25 @@
+[req]
+distinguished_name = req_distinguished_name
+req_extensions = v3_req
+[req_distinguished_name]
+countryName = MY
+countryName_default = MY
+stateOrProvinceName = WP
+stateOrProvinceName_default = WP
+localityName = KL
+localityName_default = KL
+organizationalUnitName = IT
+organizationalUnitName_default = IT
+commonName = <CN>
+commonName_max = 64
+[ v3_req ]
+# Extensions to add to a certificate request
+basicConstraints = CA:FALSE
+keyUsage = nonRepudiation, digitalSignature, keyEncipherment
+subjectAltName = @alt_names
+[alt_names]
+DNS.1 = <IP>
+DNS.2 = <DNS>
+
+
+#reference (https://medium.com/@pubudu538/how-to-create-a-self-signed-ssl-certificate-for-multiple-domains-25284c91142b)
