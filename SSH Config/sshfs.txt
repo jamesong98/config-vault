@@ -1,0 +1,1 @@
+sshfs -o allow_other -o ro,IdentityFile=<path to private key> <ssh username>@<ssh host>:<remote path> <localpath>
