@@ -1,0 +1,1 @@
+diagnose sniffer packet any "port <port number>" 
