@@ -1,0 +1,2 @@
+iptables -A FORWARD -s <source IP> -j ACCEPT
+iptables -t nat -A POSTROUTING -s <source CIDR> -d <destination CIDR> -p tcp --dport <destination port> -j MASQUERADE
