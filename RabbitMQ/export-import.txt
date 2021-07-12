@@ -1,0 +1,3 @@
+#access the cli from url http://<rabbitmq instance ip>:15672/cli/
+rabbitmqadmin export <filename>.json
+rabbitmqadmin -q import <filename>.json
