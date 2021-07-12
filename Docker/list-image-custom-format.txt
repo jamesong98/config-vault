@@ -1,0 +1,6 @@
+#Login with a user have pull and push priviledges
+#Download Image-- Use the Docker Compose
+docker-compose -f <composefile> pull
+
+#Filter Only the environment and show the tag together (this was checking what has been download only) --optional
+docker images --filter "reference=<registry url>/<folder>/*" --format "{{.Repository}}:{{.Tag}}" 
