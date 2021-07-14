@@ -28,8 +28,8 @@ server {
         }
 
 
-        if ($host != "staysafe.silverlining.systems") {
-        return 301 https://staysafe.silverlining.systems;
+        if ($host != "<dns name>") {
+        return 301 https://<dns name>;
         }
         location / {
                 proxy_pass http://localhost:<application port number>;
