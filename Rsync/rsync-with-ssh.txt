@@ -1,1 +1,1 @@
-rsync -avhe ssh --progress <source path> sftp:<destination path>
+rsync -avhe ssh --progress <source path> <SSH hostname or ip>:<destination path>
