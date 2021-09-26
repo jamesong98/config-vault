@@ -1,4 +1,5 @@
 ansible-galaxy collection install ansible.posix
+ansible-galaxy collection install community.docker (if plan to interact with docker command in playbooks)
 apt-get install ansible sshpass -y
 chmod 400 /root/ansible/secrets/id_ed25519
 export ANSIBLE_HOST_KEY_CHECKING=False
