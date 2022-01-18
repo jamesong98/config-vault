@@ -1,0 +1,9 @@
+#only works for tcp port, connectaddress cannot be loopback address
+#show current port forward rules
+netsh interface portproxy show all
+#reset/ remove all port forward rules
+netsh interface portproxy reset
+#add port forward port 9000
+netsh interface portproxy add v4tov4 listenaddress=127.0.0.1 listenport=9000 connectaddress=192.168.0.10 connectport=80
+#delete port forward 3340
+netsh interface portproxy delete v4tov4 listenport=3340 listenaddress=10.1.1.110
